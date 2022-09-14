@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.OData;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using ODataTutorial.Entities;
-using ODataTutorial.EntityFramework;
 
 
 
@@ -17,9 +15,6 @@ static IEdmModel GetEdmModel()
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<NoteAppContext>(
-    options => options.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
-);
 builder.Services.AddControllers().AddOData(opt => opt.AddRouteComponents("v1", GetEdmModel()).Filter().Select().Expand());
 builder.Services.AddSwaggerGen(c =>
 {
