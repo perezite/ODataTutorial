@@ -14,5 +14,10 @@ namespace ODataTutorial.Repositories
         {
             return Notes.Select(x => x).AsQueryable();
         }
+
+        public Note? Find(Guid key)
+        {
+            return Notes.Single(x => x.Id == key);
+        }
     }
 }
