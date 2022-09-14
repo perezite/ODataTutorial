@@ -12,6 +12,8 @@ namespace ODataTutorial.Controllers;
 
 public class NotesController : ODataController
 {
+    // temp
+
     private readonly NoteAppContext _db;
 
     private readonly ILogger<NotesController> _logger;
