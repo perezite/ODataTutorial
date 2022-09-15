@@ -1,4 +1,5 @@
-﻿using ODataTutorial.Entities;
+﻿using System.Diagnostics;
+using ODataTutorial.Entities;
 
 namespace ODataTutorial.Repositories
 {
@@ -17,7 +18,14 @@ namespace ODataTutorial.Repositories
 
         public Note? Find(Guid key)
         {
-            return Notes.Single(x => x.Id == key);
+            return Notes.SingleOrDefault(x => x.Id == key);
+        }
+
+        public void Update(Guid id, Note note)
+        {
+            var existingNote = Find(id);
+            Debug.Assert(existingNote != null, nameof(existingNote) + " != null");
+            existingNote.MessageNote = note.MessageNote;
         }
     }
 }

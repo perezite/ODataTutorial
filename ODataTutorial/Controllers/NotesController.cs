@@ -53,6 +53,26 @@ public class NotesController : ODataController
         return Updated(existingNote);
     }
 
+    [EnableQuery]
+    public async Task<IActionResult> Put([FromODataUri] Guid key, [FromBody]Note note)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var existingNote = _repository.Find(key);
+        if (existingNote == null)
+        {
+            return NotFound();
+        }
+
+        _repository.Update(key, note);
+
+        await Task.CompletedTask;
+        return Updated(existingNote);
+    }
+
     //[EnableQuery]
     //public async Task<IActionResult> Delete([FromODataUri] Guid key)
     //{
